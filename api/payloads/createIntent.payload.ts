@@ -1,186 +1,102 @@
-import { CustomerBlock } from "./customer.block";
-import { ReferenceBlock } from "./reference.block";
+type Customer = {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  email?: string;
+}; 
+
+type Reference = {
+  referenceType?: string;
+  referenceKey?: string;
+  referenceNumber?: string;
+};
+
+type Split = {
+  virtualAccount?: string;
+  amount?: number | string;
+  reference?: string;
+  chargeIndicator?: string;
+};
+
+type CreateIntentOptions = {
+  amount?: number | string;
+  paymentTypes?: string[];
+  title?: string;
+  paymentDescription?: string;
+  shortDescription?: string;
+  expiresIn?: string;
+  invoiceNumber?: string;
+  additionalDetailsPreference?: string;
+  selectedCustomerFields?: string;
+  customers?: Customer[];
+  saveForFuture?: boolean | string;
+  enablePremiumFinance?: boolean | string;
+  references?: Reference[];
+  suppressTechnologyFee?: boolean | string;
+  overrideTechnologyFee?: number | string;
+  splits?: Split[];
+};
 
 export class CreateIntentPL {
+    static payload: Record<string, unknown>;
 
-    private amount: any;
-    private title: any;
-    private saveForFuture: any;
-    private enablePremiumFinance: any;
-    private shortDescription: any; 
-    private paymentDescription: any;
-    private invoiceNumber: any;
-    private expiresIn: any;
-    private overrideTechnologyFee: any;
-    private suppressTechnologyFee: any;
-    private additionalDetailsPreference: any;
-    private selectedCustomerFields: any;
-    private paymentTypes:Array<any> = [];
+  static buildPayload(options: CreateIntentOptions = {}) {
+    this.payload = {};
+    const simpleFields: (keyof CreateIntentOptions)[] = [
+      'amount',
+      'title',
+      'paymentDescription',
+      'shortDescription',
+      'expiresIn',
+      'invoiceNumber',
+      'saveForFuture',
+      'enablePremiumFinance',
+      'suppressTechnologyFee',
+      'overrideTechnologyFee',
+      'additionalDetailsPreference',
+      'selectedCustomerFields'
+    ];
 
-    private intentBlock:Record<string, any> = {};
-
-    private customers: Array<Record<string, any>> = [];
-    private references: Array<Record<string, any>> = [];
-    private splits: Array<Record<string, any>> = [];
-
-    private payload: Record<string, any> = {};
-
-    getAmount() {
-        return this.amount;
+    for (const field of simpleFields) {
+      if (options[field] !== undefined) {
+        this.payload[field] = options[field];
+      }
+    }
+    if (options.paymentTypes?.length) {
+      this.payload.intent = {
+        paymentTypes: options.paymentTypes
+      };
+    }
+    if (options.customers?.length) {
+      this.payload.customers = options.customers
+        .map(c => ({
+          ...(c.firstName && { firstName: c.firstName }),
+          ...(c.lastName && { lastName: c.lastName }),
+          ...(c.email && { email: c.email }),
+          ...(c.phone && { phone: c.phone }),
+        }))
+        .filter(c => Object.keys(c).length > 0);
+    }
+    if (options.references?.length) {
+      this.payload.referenceDataList = options.references
+        .map(r => ({
+          ...(r.referenceType && { referenceType: r.referenceType }),
+          ...(r.referenceKey && { referenceKey: r.referenceKey }),
+          ...(r.referenceNumber && { referenceNumber: r.referenceNumber }),
+        }))
+        .filter(r => Object.keys(r).length > 0);
+    }
+    if (options.splits?.length) {
+      this.payload.splits = options.splits
+        .map(s => ({
+          ...(s.virtualAccount && { virtualAccount: s.virtualAccount }),
+          ...(s.amount && { amount: s.amount }),
+          ...(s.reference && { reference: s.reference }),
+          ...(s.chargeIndicator && { chargeIndicator: s.chargeIndicator }),
+        }))
+        .filter(s => Object.keys(s).length > 0);
     }
 
-    setAmount(amount: any) {
-        this.amount = amount;
-    }
-
-    getOverrideTechnologyFee() {
-        return this.overrideTechnologyFee;
-    }
-
-    setOverrideTechnologyFee(overrideTechnologyFee: any) {
-        this.overrideTechnologyFee = overrideTechnologyFee;
-    }
-
-    getSuppressTechnologyFee() {
-        return this.suppressTechnologyFee;
-    }
-
-    setSuppressTechnologyFee(suppressTechnologyFee: any) {
-        this.suppressTechnologyFee = suppressTechnologyFee;
-    }
-
-    getSaveForFuture() {
-        return this.saveForFuture;
-    }
-
-    setSaveForFuture(saveForFuture: any) {
-        this.saveForFuture = saveForFuture;
-    }
-
-    getEnablePremiumFinance() {
-        return this.enablePremiumFinance;
-    }
-
-    setEnablePremiumFinance(enablePremiumFinance: any) {
-        this.enablePremiumFinance = enablePremiumFinance;
-    }
-
-    getTitle() {
-        return this.title;
-    }
-
-    setTitle(title: any) {
-        this.title = title;
-    }
-
-    getShortDescription() {
-        return this.shortDescription;
-    }
-
-    setShortDescription(shortDescription: any) {
-        this.shortDescription = shortDescription;
-    }
-
-    getPaymentDescription() {
-        return this.paymentDescription;
-    }
-
-    setPaymentDescription(paymentDescription: any) {
-        this.paymentDescription = paymentDescription;
-    }
-
-    getInvoiceNumber() {
-        return this.invoiceNumber;
-    }
-
-    setInvoiceNumber(invoiceNumber: any) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-    getExpiresIn() {
-        return this.expiresIn;
-    }
-
-    setExpiresIn(expiresIn: any) {
-        this.expiresIn = expiresIn;
-    }
-
-    getPaymentTypes() {
-        return this.paymentTypes;
-    }
-
-    setPaymentTypes(paymentTypes: Array<any>) {
-        this.paymentTypes = paymentTypes;
-    }
-
-    getAdditionalDetailsPreference() {
-        return this.additionalDetailsPreference;
-    }
-
-    setAdditionalDetailsPreference(additionalDetailsPreference: any) {
-        this.additionalDetailsPreference = additionalDetailsPreference;
-    }
-
-    getSelectedCustomerFields() {
-        return this.selectedCustomerFields;
-    }
-
-    setSelectedCustomerFields(selectedCustomerFields: any) {
-        this.selectedCustomerFields = selectedCustomerFields;
-    }
-
-    getCustomers() {
-        return this.customers;
-    }
-
-    setCustomers(...customers: CustomerBlock[]) {
-        customers.forEach(customer => {
-            this.customers.push(customer.getBlock());
-        });
-    }
-
-    getReferences() {
-        return this.references;
-    }
-
-    setReferences(...references: ReferenceBlock[]) {
-        references.forEach(reference => {
-            this.references.push(reference.getBlock());
-        });
-    }
-
-    getSplits() {
-        return this.splits;
-    }
-
-    setSplits(...splits: Record<string, any>[]) {
-        this.splits.push(splits);
-    }
-
-    getIntentBlock() {
-        if (this.getPaymentTypes().length > 0) this.intentBlock['paymentTypes'] = this.getPaymentTypes();
-        return this.intentBlock;
-    }
-
-    getPayload(): Record<string, any> {
-        if (this.getAmount() != undefined) this.payload['amount'] = this.getAmount();
-        if (this.getSaveForFuture() != undefined) this.payload['saveForFuture'] = this.getSaveForFuture();
-        if (this.getTitle() != undefined) this.payload['title'] = this.getTitle();
-        if (this.getShortDescription() != undefined) this.payload['shortDescription'] = this.getShortDescription();
-        if (this.getEnablePremiumFinance() != undefined) this.payload['enablePremiumFinance'] = this.getEnablePremiumFinance();
-        if (this.getPaymentDescription() != undefined) this.payload['paymentDescription'] = this.getPaymentDescription();
-        if (this.getInvoiceNumber() != undefined) this.payload['invoiceNumber'] = this.getInvoiceNumber();
-        if (this.getExpiresIn() != undefined) this.payload['expiresIn'] = this.getExpiresIn();
-        if (this.getOverrideTechnologyFee() != undefined) this.payload['suppressTechnologyFee'] = this.getOverrideTechnologyFee();
-        if (this.getSuppressTechnologyFee() != undefined) this.payload['overrideTechnologyFee'] = this.getSuppressTechnologyFee();
-        if (this.getAdditionalDetailsPreference() != undefined) this.payload['AdditionalDetailsPreference'] = this.getAdditionalDetailsPreference();
-        if (this.getSelectedCustomerFields() != undefined) this.payload['selectedCustomerFields'] = this.getSelectedCustomerFields();
-        if (Object.keys(this.getIntentBlock()).length > 0) this.payload['intent'] = this.getIntentBlock();
-        if (this.getCustomers().length > 0) this.payload['customers'] = this.getCustomers();
-        if (this.getReferences().length > 0) this.payload['referenceDataList'] = this.getReferences();
-        if (this.getSplits().length > 0) this.payload['splits'] = this.getSplits();
-        return this.payload;
-    }
-
-
+    return this.payload;
+  }
 }

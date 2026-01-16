@@ -107,7 +107,7 @@ export class VariableFactory {
         this.responseCode = responseCode;
     }
 
-    static getResponseBody() {
+    public static getResponseBody() {
         return this.responseBody;
     }
 

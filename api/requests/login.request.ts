@@ -4,17 +4,12 @@ import { ReadAndStoreTestData } from "../../helpers/readAndStoreTestData";
 
 export class LoginRequest extends ApiUtils {
 
-    static async login(payload: Record<string, any>, options?: { headers?: Record<string, any> }) {
+    static async login(payload: Record<string, any>, options?: { origin?: string }) {
         this.setApiData("login");
-        let headerData: Record<string, any> = {};
-        if (options?.headers) {
-            headerData = Headers;
-        } else {
-            this.setHeaders(new Headers());
-            this.getHeaders().setContentType('application/json');
-            this.getHeaders().setOrigin(this.getMerchantPortalUrl());
-            headerData = this.getHeaders().getHeaders();
-        }
+        const reqOptions: any = {};
+        if (options?.origin) reqOptions.origin = options.origin;
+        else reqOptions.origin = this.getMerchantPortalUrl();
+        let headerData: Record<string, unknown> = Headers.getHeaders({contentType:'application/json', ...reqOptions })
         await ApiUtils.sendRequest(this.geApiMethod(), this.getBaseUrl() + this.getApiPath(), { headers: headerData, body: payload });
     }
 

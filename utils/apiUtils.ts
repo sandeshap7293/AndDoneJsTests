@@ -1,6 +1,6 @@
-import { ApiHeaders } from "../helpers/apiHaders";
+import { ReadAndStoreTestData } from "../helpers/readAndStoreTestData";
 
-export class ApiUtils extends ApiHeaders {
+export class ApiUtils extends ReadAndStoreTestData {
 
     static async sendRequest(
         method: string |'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
@@ -34,6 +34,15 @@ export class ApiUtils extends ApiHeaders {
         this.setResponseBody(await response.json());
         console.log('Status:', this.getResponseCode());
         console.log('Response:', this.getResponseBody());
+    }
+
+
+    static getResponseObjectValue(key:string) {
+        try {
+            return this.getResponseBody().key;
+        } catch (error) {
+            return "";        
+        }
     }
 
 
