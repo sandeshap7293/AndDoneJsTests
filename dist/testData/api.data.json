@@ -1,0 +1,10 @@
+{
+    "login": {
+        "method": "POST",
+        "path": "/users/sessions"
+    },
+    "createIntent": {
+        "method": "POST",
+        "path": "/secure/paymentintents"
+    }
+}
