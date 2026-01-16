@@ -24,10 +24,6 @@
     "@siddheshwar.anajekar/common-base": "github:ad-siddheshwaranajekar/playwright-core"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./api/createIntent.request": {
-      "types": "./dist/",
-      "default": "./dist/"
-    }
+    ".": "./dist/index.js"
   }
 }
