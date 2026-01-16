@@ -11,6 +11,6 @@
     "resolveJsonModule": true,
     "moduleResolution": "node"
   },
-  "include": ["api","helpers", "pages","testData","utils"],
+  "include": ["api", "pages","testData","utils"],
   "exclude": ["node_modules", "dist"]
 }
