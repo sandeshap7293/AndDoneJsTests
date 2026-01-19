@@ -1,11 +1,16 @@
 import {Page} from "@playwright/test";
+import { ObjectFactory } from "../helpers/objectFactory";
+import { commonUtils } from "@siddheshwar.anajekar/common-base";
 
-export class BasePage {
+export class BasePage extends ObjectFactory {
 
     readonly page: Page;
+    readonly commonUtils:commonUtils;
 
     constructor(page: Page) {
+        super();
         this.page = page;
+        this.commonUtils = new commonUtils(page);
     }
 
 }

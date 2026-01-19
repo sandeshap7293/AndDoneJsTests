@@ -21,6 +21,6 @@
     "rimraf": "^6.1.2"
   },
   "dependencies": {
-    "@siddheshwar.anajekar/common-base": "github:ad-siddheshwaranajekar/playwright-core"
+    "@siddheshwar.anajekar/common-base": "^2.0.1"
   }
 }

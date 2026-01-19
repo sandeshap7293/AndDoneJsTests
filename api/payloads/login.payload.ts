@@ -1,9 +1,6 @@
-type Login = {
-    userName?: string;
-    password?: string;
-}
+import { BaseAPI, Login } from "../base.api";
 
-export class LoginPL {
+export class LoginPayload extends BaseAPI {
 
     static payload: Record<string, unknown>;
 

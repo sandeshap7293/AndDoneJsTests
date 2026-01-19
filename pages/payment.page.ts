@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+// import { BasePage } from "@siddheshwar.anajekar/common-base";
 import { BasePage } from "./base.page";
 
 export class PaymentPage extends BasePage {
@@ -46,6 +47,10 @@ export class PaymentPage extends BasePage {
         this.card_sctn_billingAddress_sctn_countryOrRegion_tb=page.locator("select#selectCountry");
         this.card_sctn_billingAddress_sctn_stateOrProvince_tb=page.locator("select#selectState");
         this.card_sctn_billingAddress_sctn_postalCode_tb=page.locator("input#postalCode");
+    }
+
+    async fillAccountHolderName(accountHolderName:string) {
+        await this.commonUtils.fill(this.ach_sctn_accountHolderName_tb, accountHolderName);
     }
 
 

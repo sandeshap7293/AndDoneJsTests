@@ -1,16 +1,19 @@
-import { ApiUtils } from "../../utils/apiUtils";
 import { Headers } from "../payloads/headers";
-import { ReadAndStoreTestData } from "../../helpers/readAndStoreTestData";
+import { BaseAPI, Header } from "../base.api";
 
-export class LoginRequest extends ApiUtils {
+export class LoginRequest extends BaseAPI {
 
-    static async login(payload: Record<string, any>, options?: { origin?: string }) {
+    static async login(payload: Record<string, any>, 
+        headers: Header={
+            origin:this.getAdminPortalUrl(), 
+            contentType:'application/json'
+        }) {
         this.setApiData("login");
-        const reqOptions: any = {};
-        if (options?.origin) reqOptions.origin = options.origin;
-        else reqOptions.origin = this.getMerchantPortalUrl();
-        let headerData: Record<string, unknown> = Headers.getHeaders({contentType:'application/json', ...reqOptions })
-        await ApiUtils.sendRequest(this.geApiMethod(), this.getBaseUrl() + this.getApiPath(), { headers: headerData, body: payload });
+        await this.sendRequest(
+            this.geApiMethod(), 
+            this.getBaseUrl() + this.getApiPath(), 
+            { headers: Headers.getHeaders(headers), body: payload }
+        );
     }
 
 

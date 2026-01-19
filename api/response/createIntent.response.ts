@@ -1,7 +1,7 @@
-import { VariableFactory } from "../../helpers/vaiarbleFactory";
-import { ApiUtils } from "../../utils/apiUtils";
+import { BaseAPI } from "../base.api";
 
-export class CreateIntentResponse extends VariableFactory {
+
+export class CreateIntentResponse extends BaseAPI {
 
     getPaymentIntentId() {
     }

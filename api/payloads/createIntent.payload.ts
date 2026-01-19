@@ -1,24 +1,7 @@
-type Customer = {
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
-  email?: string;
-}; 
+import { GenerationUtils } from "@siddheshwar.anajekar/common-base";
+import { BaseAPI, Customer, Reference, Split } from "../base.api";
 
-type Reference = {
-  referenceType?: string;
-  referenceKey?: string;
-  referenceNumber?: string;
-};
-
-type Split = {
-  virtualAccount?: string;
-  amount?: number | string;
-  reference?: string;
-  chargeIndicator?: string;
-};
-
-type CreateIntentOptions = {
+export type CreateIntentOptions = {
   amount?: number | string;
   paymentTypes?: string[];
   title?: string;
@@ -37,10 +20,10 @@ type CreateIntentOptions = {
   splits?: Split[];
 };
 
-export class CreateIntentPL {
-    static payload: Record<string, unknown>;
+export class CreateIntentPaylod extends BaseAPI {
+  static payload: Record<string, unknown>;
 
-  static buildPayload(options: CreateIntentOptions = {}) {
+  static getPayload(options: CreateIntentOptions = {}) {
     this.payload = {};
     const simpleFields: (keyof CreateIntentOptions)[] = [
       'amount',
@@ -99,4 +82,29 @@ export class CreateIntentPL {
 
     return this.payload;
   }
+
+  static getPaylodWithDefaultValues(options: CreateIntentOptions = {}) {
+    const defaultValues: CreateIntentOptions = {
+      amount: GenerationUtils.randomFloat(100, 9999),
+      title: "PI" + GenerationUtils.getCurrentDateByTimezoneFormat('Asia/Kolkata', 'MMddyyyyHHmmss'),
+      expiresIn: "3000",
+      paymentTypes: ["ACH", "CreditCard", "DebitCard"],
+      additionalDetailsPreference: "3"
+    };
+    if (options.additionalDetailsPreference === '1') {
+      if (!options.selectedCustomerFields) options.selectedCustomerFields = "First Name,Last Name,Email,Phone Number";
+    }
+    else if (options.additionalDetailsPreference === '2') {
+      if (!options.customers) {
+        options.customers = [{
+          firstName: GenerationUtils.randomFirstName(),
+          lastName: GenerationUtils.randomLastName(),
+          phone: GenerationUtils.randomNumericString(10),
+          email: GenerationUtils.randomEmail()
+        }];
+      }
+    }
+    return this.getPayload({...defaultValues, ...options })
+  }
+
 }

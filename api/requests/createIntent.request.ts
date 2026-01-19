@@ -1,23 +1,23 @@
-
-import { ApiUtils } from "../../utils/apiUtils";
+import { BaseAPI, Header } from "../base.api";
 import { Headers } from "../payloads/headers";
 
-export class CreateIntentRequest extends ApiUtils {
+export class CreateIntentRequest extends BaseAPI {
 
     static async createIntent(payload: Record<string, unknown>, 
-        options?: { origin?:unknown, appKey?:unknown, apiKey?:unknown, xVersion?:unknown }) {
+        headers:Header = {
+            origin:this.getAndDoneJsPortalUrl(), 
+            appKey:this.getAppKey(), 
+            apiKey:this.getApiKey, 
+            xVersion:'2.0', 
+            contentType:'application/json'
+        }
+    ) {
         this.setApiData("createIntent");
-        const reqOptions: any = {};
-        if (options?.origin) reqOptions.origin = options.origin;
-        else reqOptions.origin = this.getAndDoneJsPortalUrl();
-        if (options?.appKey) reqOptions.appKey = options.appKey;
-        else reqOptions.origin = this.getAppKey();
-        if (options?.apiKey) reqOptions.apiKey = options.apiKey;
-        else reqOptions.origin = this.getApiKey();
-        if (options?.xVersion) reqOptions.xVersion = options.xVersion;
-        else reqOptions.xVersion = "2.0";
-        let headerData: Record<string, unknown> = Headers.getHeaders({contentType:'application/json', ...reqOptions })
-        await this.sendRequest(this.geApiMethod(), this.getBaseUrl() + this.getApiPath(), { headers: headerData, body: payload });
+        await this.sendRequest(
+            this.geApiMethod(), 
+            this.getBaseUrl() + this.getApiPath(), 
+            {headers: Headers.getHeaders(headers), body: payload}
+         );
     }
 
 }
