@@ -1,6 +1,7 @@
 import envData from "../testData/env.data.json"
 import apiData from "../testData/api.data.json"
 import { ObjectFactory } from "./objectFactory"
+import { VariableFactory } from "./vaiarbleFactory";
 
 type ENV = keyof typeof envData;
 type ApiName = keyof typeof apiData;

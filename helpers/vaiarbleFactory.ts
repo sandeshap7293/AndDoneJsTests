@@ -1,4 +1,5 @@
-
+import envData from "../testData/env.data.json";
+type ENV = keyof typeof envData;
 export class VariableFactory {
 
     private static apiBaseUrl:string;
@@ -137,6 +138,18 @@ export class VariableFactory {
 
     static setApiKey(apiKey:string) {
         this.apiKey = apiKey;
+    }
+
+    static setEnvorimentData(env:ENV) {
+        console.log("Setting ENv");
+        this.setBaseUrl(envData[env].apiBaseUrl);
+        this.setBaseUrl2(envData[env].apiBaseUrl2);
+        this.setAdminPortalUrl(envData[env].adminPortal);
+        this.setAdminUsername(envData[env].adminUsername);
+        this.setAdminPassword(envData[env].adminPassword);
+        this.setMerchantPortalUrl(envData[env].merchantPortal);
+        this.setAllyPortalUrl(envData[env].allyPortal);
+        this.setAndDoneJsPortalUrl(envData[env].andDoneJsPortal);
     }
 
     

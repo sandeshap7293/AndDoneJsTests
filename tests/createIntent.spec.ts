@@ -12,10 +12,13 @@ import { ApiUtils } from '../utils/apiUtils';
 test('Create Intent', async ({ page, request }) => {
     const commonU:commonUtils = new commonUtils(page);
     AssertionUtils.softVerifyTrue(true);
-    ReadAndStoreTestData.setEnvorimentData('qat');
+    VariableFactory.setEnvorimentData('qat');
+    
+    // console.log("VariableFactory instance:", VariableFactory);
     ObjectFactory.setRequest(request);
     const payload = CreateIntentPaylod.getPaylodWithDefaultValues({additionalDetailsPreference:'1'});
     console.log(payload);
+    console.log("Anddone JS:[]"+VariableFactory.getAndDoneJsPortalUrl() );
     
     const response:APIResponse = await CreateIntentRequest.createIntent(payload, {appKey: "KvoMzo8y", apiKey: "H8cX7qZssVi3Gck+4cuuucuft0oUCMCKZHvxPe+OxLQ="});
     const responseCode = response.status();
