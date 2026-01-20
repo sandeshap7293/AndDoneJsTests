@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginPL = void 0;
-class LoginPL {
+exports.LoginPayload = void 0;
+const base_api_1 = require("../base.api");
+class LoginPayload extends base_api_1.BaseAPI {
     static getPayload(options = {}) {
         const simpleFields = [
             'userName',
@@ -14,4 +15,4 @@ class LoginPL {
         }
     }
 }
-exports.LoginPL = LoginPL;
+exports.LoginPayload = LoginPayload;

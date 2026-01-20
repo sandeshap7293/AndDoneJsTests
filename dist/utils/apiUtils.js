@@ -30,14 +30,26 @@ class ApiUtils extends readAndStoreTestData_1.ReadAndStoreTestData {
         this.setResponseBody(await response.json());
         console.log('Status:', this.getResponseCode());
         console.log('Response:', this.getResponseBody());
+        return response;
     }
-    static getResponseObjectValue(key) {
+    static getResponseValue(path, defaultValue = "") {
         try {
-            return this.getResponseBody().key;
+            const body = this.getResponseBody();
+            if (!body || !path)
+                return defaultValue;
+            const result = path
+                .replace(/\[(\d+)\]/g, ".$1")
+                .split(".")
+                .reduce((obj, key) => obj?.[key], body);
+            return result ?? defaultValue;
         }
-        catch (error) {
-            return "";
+        catch (e) {
+            return defaultValue;
         }
+    }
+    static getResponseArray(path) {
+        const value = this.getResponseValue(path, []);
+        return Array.isArray(value) ? value : [];
     }
 }
 exports.ApiUtils = ApiUtils;

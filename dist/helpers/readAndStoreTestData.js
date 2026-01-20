@@ -9,6 +9,7 @@ const api_data_json_1 = __importDefault(require("../testData/api.data.json"));
 const objectFactory_1 = require("./objectFactory");
 class ReadAndStoreTestData extends objectFactory_1.ObjectFactory {
     static setEnvorimentData(env) {
+        console.log("Setting ENv");
         this.setBaseUrl(env_data_json_1.default[env].apiBaseUrl);
         this.setBaseUrl2(env_data_json_1.default[env].apiBaseUrl2);
         this.setAdminPortalUrl(env_data_json_1.default[env].adminPortal);

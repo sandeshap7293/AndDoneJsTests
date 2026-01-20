@@ -1,4 +1,4 @@
-import { VariableFactory } from "../../helpers/vaiarbleFactory";
-export declare class CreateIntentResponse extends VariableFactory {
-    getPaymentIntentId(): void;
+import { BaseAPI } from "../base.api";
+export declare class CreateIntentResponse extends BaseAPI {
+    static getPaymentIntentId(): any;
 }

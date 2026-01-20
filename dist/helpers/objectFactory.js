@@ -15,17 +15,11 @@ class ObjectFactory extends vaiarbleFactory_1.VariableFactory {
     static setResponse(response) {
         this.response = response;
     }
-    static getHeaders() {
-        return this.header;
+    static getCommonUtils() {
+        return this.commonUtils;
     }
-    static setHeaders(header) {
-        this.header = header;
-    }
-    static getLoginPL() {
-        return this.loginPL;
-    }
-    static setLoginPL(loginPL) {
-        this.loginPL = loginPL;
+    static setCommonUtils(commonUtils) {
+        this.commonUtils = commonUtils;
     }
 }
 exports.ObjectFactory = ObjectFactory;

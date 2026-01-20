@@ -1,13 +1,5 @@
-type Header = {
-    origin?: unknown;
-    contentType?: unknown;
-    authorization?: unknown;
-    appKey?: unknown;
-    apiKey?: unknown;
-    xVersion?: unknown;
-};
-export declare class Headers {
+import { BaseAPI, Header } from "../base.api";
+export declare class Headers extends BaseAPI {
     static headers: Record<string, unknown>;
     static getHeaders(options?: Header): Record<string, unknown>;
 }
-export {};

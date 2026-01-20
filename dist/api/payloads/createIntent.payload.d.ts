@@ -1,21 +1,5 @@
-type Customer = {
-    firstName?: string;
-    lastName?: string;
-    phone?: string;
-    email?: string;
-};
-type Reference = {
-    referenceType?: string;
-    referenceKey?: string;
-    referenceNumber?: string;
-};
-type Split = {
-    virtualAccount?: string;
-    amount?: number | string;
-    reference?: string;
-    chargeIndicator?: string;
-};
-type CreateIntentOptions = {
+import { BaseAPI, Customer, Reference, Split } from "../base.api";
+export type CreateIntentOptions = {
     amount?: number | string;
     paymentTypes?: string[];
     title?: string;
@@ -33,8 +17,8 @@ type CreateIntentOptions = {
     overrideTechnologyFee?: number | string;
     splits?: Split[];
 };
-export declare class CreateIntentPL {
+export declare class CreateIntentPaylod extends BaseAPI {
     static payload: Record<string, unknown>;
-    static buildPayload(options?: CreateIntentOptions): Record<string, unknown>;
+    static getPayload(options?: CreateIntentOptions): Record<string, unknown>;
+    static getPaylodWithDefaultValues(options?: CreateIntentOptions): Record<string, unknown>;
 }
-export {};

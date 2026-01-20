@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateIntentResponse = void 0;
-const vaiarbleFactory_1 = require("../../helpers/vaiarbleFactory");
-class CreateIntentResponse extends vaiarbleFactory_1.VariableFactory {
-    getPaymentIntentId() {
+const base_api_1 = require("../base.api");
+class CreateIntentResponse extends base_api_1.BaseAPI {
+    static getPaymentIntentId() {
+        return this.getResponseValue('paymentToken');
     }
 }
 exports.CreateIntentResponse = CreateIntentResponse;

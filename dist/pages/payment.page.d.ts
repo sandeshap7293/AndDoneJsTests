@@ -12,7 +12,7 @@ export declare class PaymentPage extends BasePage {
     readonly card_sctn_hdr: Locator;
     readonly card_sctn_nameOnCard_tb: Locator;
     readonly card_sctn_cardNo_tb: Locator;
-    readonly card_sctn_expirationData_tb: Locator;
+    readonly card_sctn_expirationDate_tb: Locator;
     readonly card_sctn_securityCode_tb: Locator;
     readonly card_sctn_billingAddress_sctn_hdr: Locator;
     readonly card_sctn_billingAddress_sctn_address_tb: Locator;
@@ -21,5 +21,22 @@ export declare class PaymentPage extends BasePage {
     readonly card_sctn_billingAddress_sctn_countryOrRegion_tb: Locator;
     readonly card_sctn_billingAddress_sctn_stateOrProvince_tb: Locator;
     readonly card_sctn_billingAddress_sctn_postalCode_tb: Locator;
+    readonly submitPayment_btn: Locator;
     constructor(page: Page);
+    getIndexOfPaymentMethodTab(tab: string): Promise<number>;
+    isPaymentMethodTabPresent(tab: string): Promise<boolean>;
+    clickOnPaymentMethodTab(tab: string): Promise<void>;
+    isPaymentMethodTabSelected(tab: string): Promise<boolean | undefined>;
+    fillAccountHolderName(accountHolderName: string): Promise<void>;
+    fillBankRountingNumber(bankRountingNumber: string): Promise<void>;
+    fillBankAccountNumber(bankAccountNumber: string): Promise<void>;
+    fillVerifyBankAccountNumber(bankAccountNumber: string): Promise<void>;
+    fillNameOnCard(nameOnCard: string): Promise<void>;
+    fillCardNo(cardNo: string): Promise<void>;
+    fillSecurityCode(securityCode: string): Promise<void>;
+    fillExpirationDate(expirationDate: string): Promise<void>;
+    fillAddress(address: string): Promise<void>;
+    fillCity(city: string): Promise<void>;
+    fillPostalCode(city: string): Promise<void>;
+    clickOnSubmitPayment(): Promise<void>;
 }

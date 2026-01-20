@@ -1,9 +1,5 @@
-type Login = {
-    userName?: string;
-    password?: string;
-};
-export declare class LoginPL {
+import { BaseAPI, Login } from "../base.api";
+export declare class LoginPayload extends BaseAPI {
     static payload: Record<string, unknown>;
     static getPayload(options?: Login): void;
 }
-export {};

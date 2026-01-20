@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateIntentPL = void 0;
-class CreateIntentPL {
-    static buildPayload(options = {}) {
+exports.CreateIntentPaylod = void 0;
+const common_base_1 = require("@siddheshwar.anajekar/common-base");
+const base_api_1 = require("../base.api");
+class CreateIntentPaylod extends base_api_1.BaseAPI {
+    static getPayload(options = {}) {
         this.payload = {};
         const simpleFields = [
             'amount',
@@ -59,5 +61,29 @@ class CreateIntentPL {
         }
         return this.payload;
     }
+    static getPaylodWithDefaultValues(options = {}) {
+        const defaultValues = {
+            amount: common_base_1.GenerationUtils.randomFloat(100, 9999),
+            title: "PI" + common_base_1.GenerationUtils.getCurrentDateByTimezoneFormat('Asia/Kolkata', 'MMddyyyyHHmmss'),
+            expiresIn: "3000",
+            paymentTypes: ["ACH", "CreditCard", "DebitCard"],
+            additionalDetailsPreference: "3"
+        };
+        if (options.additionalDetailsPreference === '1') {
+            if (!options.selectedCustomerFields)
+                options.selectedCustomerFields = "First Name,Last Name,Email,Phone Number";
+        }
+        else if (options.additionalDetailsPreference === '2') {
+            if (!options.customers) {
+                options.customers = [{
+                        firstName: common_base_1.GenerationUtils.randomFirstName(),
+                        lastName: common_base_1.GenerationUtils.randomLastName(),
+                        phone: common_base_1.GenerationUtils.randomNumericString(10),
+                        email: common_base_1.GenerationUtils.randomEmail()
+                    }];
+            }
+        }
+        return this.getPayload({ ...defaultValues, ...options });
+    }
 }
-exports.CreateIntentPL = CreateIntentPL;
+exports.CreateIntentPaylod = CreateIntentPaylod;

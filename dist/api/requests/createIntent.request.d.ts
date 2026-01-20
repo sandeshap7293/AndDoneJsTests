@@ -1,9 +1,4 @@
-import { ApiUtils } from "../../utils/apiUtils";
-export declare class CreateIntentRequest extends ApiUtils {
-    static createIntent(payload: Record<string, unknown>, options?: {
-        origin?: unknown;
-        appKey?: unknown;
-        apiKey?: unknown;
-        xVersion?: unknown;
-    }): Promise<void>;
+import { BaseAPI, Header } from "../base.api";
+export declare class CreateIntentRequest extends BaseAPI {
+    static createIntent(payload: Record<string, unknown>, headers: Header): Promise<import("playwright-core").APIResponse>;
 }

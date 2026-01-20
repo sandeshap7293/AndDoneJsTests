@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Headers = void 0;
-class Headers {
+const base_api_1 = require("../base.api");
+class Headers extends base_api_1.BaseAPI {
     static getHeaders(options = {}) {
         this.headers = {};
         if (options.origin)

@@ -4,6 +4,7 @@ export declare class ApiUtils extends ReadAndStoreTestData {
         body?: Record<string, any>;
         headers?: Record<string, any>;
         queryParams?: Record<string, any>;
-    }): Promise<void>;
-    static getResponseObjectValue(key: string): any;
+    }): Promise<import("playwright-core").APIResponse>;
+    static getResponseValue(path: string, defaultValue?: any): any;
+    static getResponseArray<T = any>(path: string): T[];
 }

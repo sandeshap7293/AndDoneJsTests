@@ -1,6 +1,4 @@
-import { ApiUtils } from "../../utils/apiUtils";
-export declare class LoginRequest extends ApiUtils {
-    static login(payload: Record<string, any>, options?: {
-        origin?: string;
-    }): Promise<void>;
+import { BaseAPI, Header } from "../base.api";
+export declare class LoginRequest extends BaseAPI {
+    static login(payload: Record<string, any>, headers: Header): Promise<import("playwright-core").APIResponse>;
 }
