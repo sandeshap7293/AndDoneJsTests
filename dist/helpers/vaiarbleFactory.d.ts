@@ -1,3 +1,5 @@
+import envData from "../testData/env.data.json";
+type ENV = keyof typeof envData;
 export declare class VariableFactory {
     private static apiBaseUrl;
     private static apiBaseUrl2;
@@ -44,4 +46,6 @@ export declare class VariableFactory {
     static setAppKey(appKey: string): void;
     static getApiKey(): string;
     static setApiKey(apiKey: string): void;
+    static setEnvorimentData(env: ENV): void;
 }
+export {};

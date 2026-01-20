@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VariableFactory = void 0;
+const env_data_json_1 = __importDefault(require("../testData/env.data.json"));
 class VariableFactory {
     static getBaseUrl() {
         return this.apiBaseUrl;
@@ -91,6 +95,17 @@ class VariableFactory {
     }
     static setApiKey(apiKey) {
         this.apiKey = apiKey;
+    }
+    static setEnvorimentData(env) {
+        console.log("Setting ENv");
+        this.setBaseUrl(env_data_json_1.default[env].apiBaseUrl);
+        this.setBaseUrl2(env_data_json_1.default[env].apiBaseUrl2);
+        this.setAdminPortalUrl(env_data_json_1.default[env].adminPortal);
+        this.setAdminUsername(env_data_json_1.default[env].adminUsername);
+        this.setAdminPassword(env_data_json_1.default[env].adminPassword);
+        this.setMerchantPortalUrl(env_data_json_1.default[env].merchantPortal);
+        this.setAllyPortalUrl(env_data_json_1.default[env].allyPortal);
+        this.setAndDoneJsPortalUrl(env_data_json_1.default[env].andDoneJsPortal);
     }
 }
 exports.VariableFactory = VariableFactory;
