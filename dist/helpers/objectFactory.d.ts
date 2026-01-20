@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
-import { VariableFactory } from "./vaiarbleFactory";
+import { VariableFactory } from "./variableFactory";
 import { commonUtils } from "@siddheshwar.anajekar/common-base";
 export declare class ObjectFactory extends VariableFactory {
     private static request;

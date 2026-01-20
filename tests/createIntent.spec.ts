@@ -1,7 +1,7 @@
 import { test, expect, APIResponse } from '@playwright/test';
 import { ReadAndStoreTestData } from '../helpers/readAndStoreTestData';
 import { CreateIntentRequest } from '../api/requests/createIntent.request';
-import { VariableFactory } from '../helpers/vaiarbleFactory';
+import { VariableFactory } from '../helpers/variableFactory';
 import { ObjectFactory } from '../helpers/objectFactory';
 import { CreateIntentPaylod } from '../api/payloads/createIntent.payload';
 import { commonUtils, GenerationUtils } from '@siddheshwar.anajekar/common-base';

@@ -5,6 +5,7 @@ const common_base_1 = require("@siddheshwar.anajekar/common-base");
 const base_api_1 = require("../base.api");
 class CreateIntentPaylod extends base_api_1.BaseAPI {
     static getPayload(options = {}) {
+        var _a, _b, _c, _d;
         this.payload = {};
         const simpleFields = [
             'amount',
@@ -25,12 +26,12 @@ class CreateIntentPaylod extends base_api_1.BaseAPI {
                 this.payload[field] = options[field];
             }
         }
-        if (options.paymentTypes?.length) {
+        if ((_a = options.paymentTypes) === null || _a === void 0 ? void 0 : _a.length) {
             this.payload.intent = {
                 paymentTypes: options.paymentTypes
             };
         }
-        if (options.customers?.length) {
+        if ((_b = options.customers) === null || _b === void 0 ? void 0 : _b.length) {
             this.payload.customers = options.customers
                 .map(c => ({
                 ...(c.firstName && { firstName: c.firstName }),
@@ -40,7 +41,7 @@ class CreateIntentPaylod extends base_api_1.BaseAPI {
             }))
                 .filter(c => Object.keys(c).length > 0);
         }
-        if (options.references?.length) {
+        if ((_c = options.references) === null || _c === void 0 ? void 0 : _c.length) {
             this.payload.referenceDataList = options.references
                 .map(r => ({
                 ...(r.referenceType && { referenceType: r.referenceType }),
@@ -49,7 +50,7 @@ class CreateIntentPaylod extends base_api_1.BaseAPI {
             }))
                 .filter(r => Object.keys(r).length > 0);
         }
-        if (options.splits?.length) {
+        if ((_d = options.splits) === null || _d === void 0 ? void 0 : _d.length) {
             this.payload.splits = options.splits
                 .map(s => ({
                 ...(s.virtualAccount && { virtualAccount: s.virtualAccount }),

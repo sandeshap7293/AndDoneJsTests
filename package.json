@@ -1,6 +1,6 @@
 {
-  "name": "tests_anddonejs",
-  "version": "1.0.4",
+  "name": "anddonejs1",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,16 +8,16 @@
     "dist"
   ],
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run clean && tsc",
+    "build": "tsc",
     "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.6",
+    "@types/node": "^25.0.9",
     "rimraf": "^6.1.2"
   },
   "dependencies": {

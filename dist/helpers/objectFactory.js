@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ObjectFactory = void 0;
-const vaiarbleFactory_1 = require("./vaiarbleFactory");
-class ObjectFactory extends vaiarbleFactory_1.VariableFactory {
+const variableFactory_1 = require("./variableFactory");
+class ObjectFactory extends variableFactory_1.VariableFactory {
     static getRequest() {
         return this.request;
     }

@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
     "rootDir": "",
     "outDir": "dist",
+    "target": "ES2019",
+    "module": "CommonJS",
     "declaration": true,
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node"
-  },
-  "include": ["api","helpers", "pages","testData","utils"],
-  "exclude": ["node_modules", "dist"]
+    "moduleResolution": "node",
+    "skipLibCheck": true
+  }
 }

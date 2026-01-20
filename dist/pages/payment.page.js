@@ -55,7 +55,7 @@ class PaymentPage extends base_page_1.BasePage {
         const index = await this.getIndexOfPaymentMethodTab(tab);
         if (index >= 0) {
             let value = await this.paymentMethod_sctn_tab_list.nth(index).getAttribute('class');
-            return value?.includes('select');
+            return value === null || value === void 0 ? void 0 : value.includes('select');
         }
         else
             return false;

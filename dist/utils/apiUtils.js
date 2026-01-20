@@ -5,13 +5,13 @@ const readAndStoreTestData_1 = require("../helpers/readAndStoreTestData");
 class ApiUtils extends readAndStoreTestData_1.ReadAndStoreTestData {
     static async sendRequest(method, url, options) {
         const reqOptions = {};
-        if (options?.headers) {
+        if (options === null || options === void 0 ? void 0 : options.headers) {
             reqOptions.headers = options.headers;
         }
-        if (options?.queryParams) {
+        if (options === null || options === void 0 ? void 0 : options.queryParams) {
             reqOptions.params = options.queryParams;
         }
-        if (options?.body) {
+        if (options === null || options === void 0 ? void 0 : options.body) {
             reqOptions.data = options.body;
         }
         console.log(method, url);
@@ -40,8 +40,8 @@ class ApiUtils extends readAndStoreTestData_1.ReadAndStoreTestData {
             const result = path
                 .replace(/\[(\d+)\]/g, ".$1")
                 .split(".")
-                .reduce((obj, key) => obj?.[key], body);
-            return result ?? defaultValue;
+                .reduce((obj, key) => obj === null || obj === void 0 ? void 0 : obj[key], body);
+            return result !== null && result !== void 0 ? result : defaultValue;
         }
         catch (e) {
             return defaultValue;
