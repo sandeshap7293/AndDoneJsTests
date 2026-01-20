@@ -8,6 +8,7 @@ type ApiName = keyof typeof apiData;
 export class ReadAndStoreTestData extends ObjectFactory {
 
     static setEnvorimentData(env:ENV) {
+        console.log("Setting ENv");
         this.setBaseUrl(envData[env].apiBaseUrl);
         this.setBaseUrl2(envData[env].apiBaseUrl2);
         this.setAdminPortalUrl(envData[env].adminPortal);

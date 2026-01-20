@@ -3,7 +3,7 @@ import { ReadAndStoreTestData } from "../helpers/readAndStoreTestData";
 export class ApiUtils extends ReadAndStoreTestData {
 
     static async sendRequest(
-        method: string |'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
+        method: string | 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
         url: string,
         options?: {
             body?: Record<string, any>;
@@ -34,15 +34,26 @@ export class ApiUtils extends ReadAndStoreTestData {
         this.setResponseBody(await response.json());
         console.log('Status:', this.getResponseCode());
         console.log('Response:', this.getResponseBody());
+        return response;
     }
 
-
-    static getResponseObjectValue(key:string) {
+    static getResponseValue(path: string, defaultValue: any = "") {
         try {
-            return this.getResponseBody().key;
-        } catch (error) {
-            return "";        
+            const body = this.getResponseBody();
+            if (!body || !path) return defaultValue;
+            const result = path
+                .replace(/\[(\d+)\]/g, ".$1")
+                .split(".")
+                .reduce((obj, key) => obj?.[key], body);
+            return result ?? defaultValue;
+        } catch (e) {
+            return defaultValue;
         }
+    }
+
+    static getResponseArray<T = any>(path: string): T[] {
+        const value = this.getResponseValue(path, []);
+        return Array.isArray(value) ? value : [];
     }
 
 

@@ -3,20 +3,19 @@ import { Headers } from "../payloads/headers";
 
 export class CreateIntentRequest extends BaseAPI {
 
-    static async createIntent(payload: Record<string, unknown>, 
-        headers:Header = {
+    static async createIntent(payload: Record<string, unknown>, headers:Header) {
+        this.setApiData("createIntent");
+        const defaultValue = {
             origin:this.getAndDoneJsPortalUrl(), 
             appKey:this.getAppKey(), 
             apiKey:this.getApiKey, 
             xVersion:'2.0', 
             contentType:'application/json'
         }
-    ) {
-        this.setApiData("createIntent");
-        await this.sendRequest(
+        return await this.sendRequest(
             this.geApiMethod(), 
             this.getBaseUrl() + this.getApiPath(), 
-            {headers: Headers.getHeaders(headers), body: payload}
+            {headers: Headers.getHeaders({...defaultValue, ...headers}), body: payload}
          );
     }
 
