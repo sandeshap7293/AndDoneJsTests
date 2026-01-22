@@ -27,7 +27,6 @@ __exportStar(require("./api/response/createIntent.response"), exports);
 __exportStar(require("./api/base.api"), exports);
 __exportStar(require("./helpers/objectFactory"), exports);
 __exportStar(require("./helpers/variableFactory"), exports);
-__exportStar(require("./helpers/readAndStoreTestData"), exports);
 __exportStar(require("./pages/base.page"), exports);
 __exportStar(require("./pages/payment.page"), exports);
 __exportStar(require("./pages/summary.page"), exports);

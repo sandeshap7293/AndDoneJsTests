@@ -1,6 +1,7 @@
 import envData from "../testData/env.data.json";
 type ENV = keyof typeof envData;
 export declare class VariableFactory {
+    static apiLogs: boolean;
     private static apiBaseUrl;
     private static apiBaseUrl2;
     private static adminPortalUrl;
@@ -9,13 +10,10 @@ export declare class VariableFactory {
     private static merchantPortalUrl;
     private static allyPortalUrl;
     private static andDoneJsPortalUrl;
-    private static apiMethod;
-    private static apiPath;
-    private static responseCode;
-    private static responseBody;
     private static token;
     private static appKey;
     private static apiKey;
+    private static paymentToken;
     static getBaseUrl(): string;
     static setBaseUrl(apiBaseUrl: string): void;
     static getBaseUrl2(): string;
@@ -32,20 +30,14 @@ export declare class VariableFactory {
     static setAllyPortalUrl(allyPortalUrl: string): void;
     static getAndDoneJsPortalUrl(): string;
     static setAndDoneJsPortalUrl(andDoneJsPortalUrl: string): void;
-    static geApiMethod(): string;
-    static setApiMethod(apiMethod: string): void;
-    static getApiPath(): string;
-    static setApiPath(apiPath: string): void;
-    static getResponseCode(): number;
-    static setResponseCode(responseCode: number): void;
-    static getResponseBody(): any;
-    static setResponseBody(responseBody: string): void;
     static geToken(): string;
     static setToken(token: string): void;
     static getAppKey(): string;
     static setAppKey(appKey: string): void;
     static getApiKey(): string;
     static setApiKey(apiKey: string): void;
+    static getPaymentToken(): string;
+    static setPaymentToken(paymentToken: string): void;
     static setEnvorimentData(env: ENV): void;
 }
 export {};

@@ -9,11 +9,11 @@ class CreateIntentRequest extends base_api_1.BaseAPI {
         const defaultValue = {
             origin: this.getAndDoneJsPortalUrl(),
             appKey: this.getAppKey(),
-            apiKey: this.getApiKey,
+            apiKey: this.getApiKey(),
             xVersion: '2.0',
             contentType: 'application/json'
         };
-        return await this.sendRequest(this.geApiMethod(), this.getBaseUrl() + this.getApiPath(), { headers: headers_1.Headers.getHeaders({ ...defaultValue, ...headers }), body: payload });
+        return this.sendRequest(this.geApiMethod(), this.getBaseUrl() + this.getApiPath(), { headers: headers_1.Headers.getHeaders({ ...defaultValue, ...headers }), body: payload });
     }
 }
 exports.CreateIntentRequest = CreateIntentRequest;

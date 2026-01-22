@@ -54,30 +54,6 @@ class VariableFactory {
     static setAndDoneJsPortalUrl(andDoneJsPortalUrl) {
         this.andDoneJsPortalUrl = andDoneJsPortalUrl;
     }
-    static geApiMethod() {
-        return this.apiMethod;
-    }
-    static setApiMethod(apiMethod) {
-        this.apiMethod = apiMethod;
-    }
-    static getApiPath() {
-        return this.apiPath;
-    }
-    static setApiPath(apiPath) {
-        this.apiPath = apiPath;
-    }
-    static getResponseCode() {
-        return this.responseCode;
-    }
-    static setResponseCode(responseCode) {
-        this.responseCode = responseCode;
-    }
-    static getResponseBody() {
-        return this.responseBody;
-    }
-    static setResponseBody(responseBody) {
-        this.responseBody = responseBody;
-    }
     static geToken() {
         return this.token;
     }
@@ -96,6 +72,12 @@ class VariableFactory {
     static setApiKey(apiKey) {
         this.apiKey = apiKey;
     }
+    static getPaymentToken() {
+        return this.paymentToken;
+    }
+    static setPaymentToken(paymentToken) {
+        this.paymentToken = paymentToken;
+    }
     static setEnvorimentData(env) {
         console.log("Setting ENv");
         this.setBaseUrl(env_data_json_1.default[env].apiBaseUrl);
@@ -109,3 +91,4 @@ class VariableFactory {
     }
 }
 exports.VariableFactory = VariableFactory;
+VariableFactory.apiLogs = true;

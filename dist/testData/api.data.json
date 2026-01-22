@@ -3,6 +3,10 @@
         "method": "POST",
         "path": "/users/sessions"
     },
+    "getMerchantListing": {
+        "method": "GET",
+        "path": "/merchants"
+    },
     "createIntent": {
         "method": "POST",
         "path": "/secure/paymentintents"

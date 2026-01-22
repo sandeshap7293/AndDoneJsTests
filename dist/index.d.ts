@@ -7,7 +7,6 @@ export * from "./api/response/createIntent.response";
 export * from "./api/base.api";
 export * from "./helpers/objectFactory";
 export * from "./helpers/variableFactory";
-export * from "./helpers/readAndStoreTestData";
 export * from "./pages/base.page";
 export * from "./pages/payment.page";
 export * from "./pages/summary.page";
