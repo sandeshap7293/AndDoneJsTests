@@ -2,7 +2,7 @@ import { BaseAPI, Header } from "../base.api";
 
 export class Headers extends BaseAPI {
 
-    static headers: Record<string, unknown>;
+    static headers: Record<string, string>;
 
     static getHeaders(options: Header = {}) {
         this.headers = {};

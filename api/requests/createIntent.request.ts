@@ -8,15 +8,15 @@ export class CreateIntentRequest extends BaseAPI {
         const defaultValue = {
             origin:this.getAndDoneJsPortalUrl(), 
             appKey:this.getAppKey(), 
-            apiKey:this.getApiKey, 
+            apiKey:this.getApiKey(), 
             xVersion:'2.0', 
             contentType:'application/json'
         }
-        return await this.sendRequest(
+        return this.sendRequest(
             this.geApiMethod(), 
             this.getBaseUrl() + this.getApiPath(), 
             {headers: Headers.getHeaders({...defaultValue, ...headers}), body: payload}
-         );
+         ); 
     }
 
 }

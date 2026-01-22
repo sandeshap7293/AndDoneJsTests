@@ -22,5 +22,16 @@
   },
   "dependencies": {
     "@siddheshwar.anajekar/common-base": "^2.0.1"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandeshap7293/AndDoneJsTests.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sandeshap7293/AndDoneJsTests/issues"
+  },
+  "homepage": "https://github.com/sandeshap7293/AndDoneJsTests#readme"
 }

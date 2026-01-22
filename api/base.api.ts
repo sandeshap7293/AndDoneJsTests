@@ -1,12 +1,12 @@
 import { ApiUtils } from "../utils/apiUtils";
 
 export type Header = {
-    origin?: unknown;
-    contentType?: unknown;
-    authorization?: unknown;
-    appKey?: unknown;
-    apiKey?: unknown;
-    xVersion?: unknown;
+    origin?: string;
+    contentType?: string;
+    authorization?: string;
+    appKey?: string;
+    apiKey?: string;
+    xVersion?: string;
 }
 
 export type Customer = {
@@ -35,5 +35,7 @@ export type Login = {
 }
 
 export class BaseAPI extends ApiUtils {
+
+  
 
 }

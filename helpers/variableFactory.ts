@@ -1,6 +1,10 @@
 import envData from "../testData/env.data.json";
+
 type ENV = keyof typeof envData;
+
 export class VariableFactory {
+
+    static apiLogs: boolean = true;
 
     private static apiBaseUrl:string;
     private static apiBaseUrl2:string;
@@ -11,14 +15,10 @@ export class VariableFactory {
     private static allyPortalUrl:string;
     private static andDoneJsPortalUrl:string;
     
-    private static apiMethod:string;
-    private static apiPath:string;
-    private static responseCode:number;
-    private static responseBody:any;
-
     private static token:string
     private static appKey:string
     private static apiKey:string
+    private static paymentToken:string;
 
     static getBaseUrl() {
         return this.apiBaseUrl;
@@ -84,38 +84,6 @@ export class VariableFactory {
         this.andDoneJsPortalUrl = andDoneJsPortalUrl;
     }
 
-    static geApiMethod() {
-        return this.apiMethod;
-    }
-
-    static setApiMethod(apiMethod:string) {
-        this.apiMethod = apiMethod;
-    }
-
-    static getApiPath() {
-        return this.apiPath;
-    }
-
-    static setApiPath(apiPath:string) {
-        this.apiPath = apiPath;
-    }
-
-    static getResponseCode() {
-        return this.responseCode;
-    }
-
-    static setResponseCode(responseCode:number) {
-        this.responseCode = responseCode;
-    }
-
-    public static getResponseBody() {
-        return this.responseBody;
-    }
-
-    static setResponseBody(responseBody:string) {
-        this.responseBody = responseBody;
-    }
-
     static geToken() {
         return this.token;
     }
@@ -140,6 +108,14 @@ export class VariableFactory {
         this.apiKey = apiKey;
     }
 
+    static getPaymentToken() {
+        return this.paymentToken;
+    }
+
+    static setPaymentToken(paymentToken:string) {
+        this.paymentToken = paymentToken;
+    }
+
     static setEnvorimentData(env:ENV) {
         console.log("Setting ENv");
         this.setBaseUrl(envData[env].apiBaseUrl);
@@ -152,6 +128,6 @@ export class VariableFactory {
         this.setAndDoneJsPortalUrl(envData[env].andDoneJsPortal);
     }
 
-    
+       
 
 }
