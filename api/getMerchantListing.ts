@@ -1,6 +1,5 @@
 import { ApiUtils } from "../utils/apiUtils";
 import { BaseAPI, Header } from "./base.api";
-import { CreateIntentOptions } from "./createIntent";
 import { Headers } from "./payloads/headers";
 
 export type GetMerchantListingQueryParamsOptions = {

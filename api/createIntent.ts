@@ -2,7 +2,7 @@ import { GenerationUtils } from "@siddheshwar.anajekar/common-base";
 import { BaseAPI, Customer, Header, Reference, Split } from "./base.api";
 import { Headers } from "./payloads/headers";
 
-export type CreateIntentOptions = {
+export type CreateIntentOptions2 = {
     amount?: number | string;
     paymentTypes?: string[];
     title?: string;
@@ -25,9 +25,9 @@ export class CreateIntent extends BaseAPI {
 
     static payload: Record<string, unknown>;
 
-    static getPayload(options: CreateIntentOptions = {}) {
+    static getPayload(options: CreateIntentOptions2 = {}) {
         this.payload = {};
-        const simpleFields: (keyof CreateIntentOptions)[] = [
+        const simpleFields: (keyof CreateIntentOptions2)[] = [
             'amount',
             'title',
             'paymentDescription',
@@ -85,8 +85,8 @@ export class CreateIntent extends BaseAPI {
         return this.payload;
     }
 
-    static getPaylodWithDefaultValues(options: CreateIntentOptions = {}) {
-        const defaultValues: CreateIntentOptions = {
+    static getPaylodWithDefaultValues(options: CreateIntentOptions2 = {}) {
+        const defaultValues: CreateIntentOptions2 = {
             amount: GenerationUtils.randomFloat(100, 9999),
             title: "PI" + GenerationUtils.getCurrentDateByTimezoneFormat('Asia/Kolkata', 'MMddyyyyHHmmss'),
             expiresIn: "3000",
@@ -109,7 +109,7 @@ export class CreateIntent extends BaseAPI {
         return this.getPayload({ ...defaultValues, ...options })
     }
 
-    static async createIntent(body: CreateIntentOptions, headers?: Header) {
+    static async createIntent(body: CreateIntentOptions2, headers?: Header) {
         this.setApiData("createIntent");
         const defaultValue = {
             origin: this.getAndDoneJsPortalUrl(),
@@ -126,7 +126,7 @@ export class CreateIntent extends BaseAPI {
         );
     }
 
-    static async createIntentWithDefaultValues(body: CreateIntentOptions, headers?: Header) {
+    static async createIntentWithDefaultValues(body: CreateIntentOptions2, headers?: Header) {
         this.setApiData("createIntent");
         const defaultValue = {
             origin: this.getAndDoneJsPortalUrl(),

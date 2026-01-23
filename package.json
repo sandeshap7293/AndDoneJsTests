@@ -21,7 +21,7 @@
     "rimraf": "^6.1.2"
   },
   "dependencies": {
-    "@siddheshwar.anajekar/common-base": "^2.0.1"
+    "@siddheshwar.anajekar/common-base": "^2.0.15"
   },
   "directories": {
     "test": "tests"
