@@ -1,4 +1,4 @@
 import { BaseAPI, Header } from "../base.api";
 export declare class CreateIntentRequest extends BaseAPI {
-    static createIntent(payload: Record<string, unknown>, headers: Header): Promise<any>;
+    static createIntent(payload: Record<string, unknown>, headers?: Header): Promise<any>;
 }

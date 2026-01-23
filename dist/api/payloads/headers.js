@@ -10,7 +10,7 @@ class Headers extends base_api_1.BaseAPI {
         if (options.contentType)
             this.headers['Content-Type'] = options.contentType;
         if (options.authorization)
-            this.headers['Authorization'] = options.authorization;
+            this.headers['Authorization'] = 'Bearer ' + options.authorization;
         if (options.xVersion)
             this.headers['x-version'] = options.xVersion;
         if (options.apiKey)

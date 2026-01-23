@@ -54,11 +54,11 @@ class VariableFactory {
     static setAndDoneJsPortalUrl(andDoneJsPortalUrl) {
         this.andDoneJsPortalUrl = andDoneJsPortalUrl;
     }
-    static geToken() {
-        return this.token;
+    static getLoginToken() {
+        return this.loginToken;
     }
-    static setToken(token) {
-        this.token = token;
+    static setLoginToken(loginToken) {
+        this.loginToken = loginToken;
     }
     static getAppKey() {
         return this.appKey;

@@ -1,4 +1,4 @@
-import { Customer, Reference, Split } from "./base.api";
+import { BaseAPI, Customer, Header, Reference, Split } from "./base.api";
 export type CreateIntentOptions = {
     amount?: number | string;
     paymentTypes?: string[];
@@ -17,3 +17,11 @@ export type CreateIntentOptions = {
     overrideTechnologyFee?: number | string;
     splits?: Split[];
 };
+export declare class CreateIntent extends BaseAPI {
+    static payload: Record<string, unknown>;
+    static getPayload(options?: CreateIntentOptions): Record<string, unknown>;
+    static getPaylodWithDefaultValues(options?: CreateIntentOptions): Record<string, unknown>;
+    static createIntent(body: CreateIntentOptions, headers?: Header): Promise<any>;
+    static createIntentWithDefaultValues(body: CreateIntentOptions, headers?: Header): Promise<any>;
+    static getPaymentIntentId(): Promise<any>;
+}

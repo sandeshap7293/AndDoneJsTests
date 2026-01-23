@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CreateIntent = void 0;
 const common_base_1 = require("@siddheshwar.anajekar/common-base");
 const base_api_1 = require("./base.api");
 const headers_1 = require("./payloads/headers");
@@ -98,4 +99,20 @@ class CreateIntent extends base_api_1.BaseAPI {
         this.payload = this.getPayload(body);
         return this.sendRequest(this.geApiMethod(), this.getBaseUrl() + this.getApiPath(), { headers: headers_1.Headers.getHeaders({ ...defaultValue, ...headers }), body: this.payload });
     }
+    static async createIntentWithDefaultValues(body, headers) {
+        this.setApiData("createIntent");
+        const defaultValue = {
+            origin: this.getAndDoneJsPortalUrl(),
+            appKey: this.getAppKey(),
+            apiKey: this.getApiKey(),
+            xVersion: '2.0',
+            contentType: 'application/json'
+        };
+        this.payload = this.getPaylodWithDefaultValues(body);
+        return this.sendRequest(this.geApiMethod(), this.getBaseUrl() + this.getApiPath(), { headers: headers_1.Headers.getHeaders({ ...defaultValue, ...headers }), body: this.payload });
+    }
+    static async getPaymentIntentId() {
+        return await this.getResponseValue('paymentToken');
+    }
 }
+exports.CreateIntent = CreateIntent;

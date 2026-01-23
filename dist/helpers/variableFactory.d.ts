@@ -10,7 +10,7 @@ export declare class VariableFactory {
     private static merchantPortalUrl;
     private static allyPortalUrl;
     private static andDoneJsPortalUrl;
-    private static token;
+    private static loginToken;
     private static appKey;
     private static apiKey;
     private static paymentToken;
@@ -30,8 +30,8 @@ export declare class VariableFactory {
     static setAllyPortalUrl(allyPortalUrl: string): void;
     static getAndDoneJsPortalUrl(): string;
     static setAndDoneJsPortalUrl(andDoneJsPortalUrl: string): void;
-    static geToken(): string;
-    static setToken(token: string): void;
+    static getLoginToken(): string;
+    static setLoginToken(loginToken: string): void;
     static getAppKey(): string;
     static setAppKey(appKey: string): void;
     static getApiKey(): string;

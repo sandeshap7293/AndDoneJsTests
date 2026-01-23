@@ -4,6 +4,7 @@ exports.LoginPayload = void 0;
 const base_api_1 = require("../base.api");
 class LoginPayload extends base_api_1.BaseAPI {
     static getPayload(options = {}) {
+        this.payload = {};
         const simpleFields = [
             'userName',
             'password',
@@ -13,6 +14,7 @@ class LoginPayload extends base_api_1.BaseAPI {
                 this.payload[field] = options[field];
             }
         }
+        return this.payload;
     }
 }
 exports.LoginPayload = LoginPayload;

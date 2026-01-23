@@ -6,6 +6,7 @@ type RequestOptions = {
     body?: unknown;
     headers?: Record<string, string>;
     queryParams?: Record<string, string | number | boolean>;
+    pathParams?: Record<string, string>;
 };
 export declare class EmptyApiResponse {
     status(): number;
@@ -52,6 +53,7 @@ export declare class ApiUtils extends ObjectFactory {
      * @returns string
      */
     static getApiPath(): string;
+    private static buildPath;
     /**
      * This method to log request details in console if apiLogs flag is true.
      * @param method string | 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
@@ -108,6 +110,13 @@ export declare class ApiUtils extends ObjectFactory {
      * @param path string - example 'customers'
      * @returns T = any []
      */
-    static getResponseArray<T = any>(path: string): T[];
+    static getResponseArray<T = any>(path: string): Promise<T[]>;
+    /**
+  * Finds an object inside an array and returns its id where multiple fields match
+  * @param arrayPath Path to array. Example: "data"
+  * @param match Object with fields to match. Example: { allyName: "Zbook1201", status: "ACTIVE" }
+  * @param idField Field to return (default = "id")
+  */
+    static getResponseValueFromArray(arrayPath: string, objectName: string, match: Record<string, any>): Promise<string>;
 }
 export {};

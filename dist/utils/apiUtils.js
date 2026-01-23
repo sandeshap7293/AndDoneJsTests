@@ -64,6 +64,15 @@ class ApiUtils extends objectFactory_1.ObjectFactory {
     static getApiPath() {
         return this.apiPath;
     }
+    static buildPath(apiPath, pathParams) {
+        if (!pathParams)
+            return apiPath;
+        let finalPath = apiPath;
+        for (const [key, value] of Object.entries(pathParams)) {
+            finalPath = finalPath.replace(new RegExp(`{${key}}`, "g"), encodeURIComponent(String(value)));
+        }
+        return finalPath;
+    }
     /**
      * This method to log request details in console if apiLogs flag is true.
      * @param method string | 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
@@ -146,6 +155,7 @@ class ApiUtils extends objectFactory_1.ObjectFactory {
      * const  response = sendRequest('POST', {BaseUrl}+{ApiPath}, {headers: {...headers}, body: {...payload}});
      */
     static async sendRequest(method, url, options) {
+        url = this.buildPath(url, options === null || options === void 0 ? void 0 : options.pathParams);
         this.logRequest(method, url, options);
         const reqOptions = {};
         if (options === null || options === void 0 ? void 0 : options.headers)
@@ -198,9 +208,49 @@ class ApiUtils extends objectFactory_1.ObjectFactory {
      * @param path string - example 'customers'
      * @returns T = any []
      */
-    static getResponseArray(path) {
-        const value = this.getResponseValue(path, []);
+    static async getResponseArray(path) {
+        const value = await this.getResponseValue(path, []);
         return Array.isArray(value) ? value : [];
+    }
+    /**
+  * Finds an object inside an array and returns its id where multiple fields match
+  * @param arrayPath Path to array. Example: "data"
+  * @param match Object with fields to match. Example: { allyName: "Zbook1201", status: "ACTIVE" }
+  * @param idField Field to return (default = "id")
+  */
+    static async getResponseValueFromArray(arrayPath, objectName, match) {
+        try {
+            if (!match || typeof match !== "object") {
+                return "";
+            }
+            let arr;
+            if (!arrayPath) {
+                // ✅ Root response is array
+                const body = await this.getResponseBody();
+                arr = Array.isArray(body) ? body : [];
+            }
+            else {
+                // ✅ Array is inside object path
+                arr = await this.getResponseArray(arrayPath);
+            }
+            if (!Array.isArray(arr) || arr.length === 0) {
+                return "";
+            }
+            const found = arr.find(item => {
+                if (!item || typeof item !== "object")
+                    return false;
+                return Object.entries(match).every(([key, value]) => (item === null || item === void 0 ? void 0 : item[key]) === value);
+            });
+            if (!found || typeof found !== "object") {
+                return "";
+            }
+            const result = found === null || found === void 0 ? void 0 : found[objectName];
+            return result !== undefined && result !== null ? String(result) : "";
+        }
+        catch (error) {
+            // Optional: console.warn("⚠️ getResponseValueFromArray failed:", error);
+            return "";
+        }
     }
 }
 exports.ApiUtils = ApiUtils;
