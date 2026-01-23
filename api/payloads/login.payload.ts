@@ -5,6 +5,7 @@ export class LoginPayload extends BaseAPI {
     static payload: Record<string, unknown>;
 
     static getPayload(options: Login = {}) {
+        this.payload = {};
         const simpleFields: (keyof Login)[] = [
             'userName',
             'password',
@@ -14,6 +15,7 @@ export class LoginPayload extends BaseAPI {
                 this.payload[field] = options[field];
             }
         }
+        return this.payload;
     }
 
 }

@@ -21,7 +21,7 @@ export type CreateIntentOptions = {
     splits?: Split[];
 };
 
-class CreateIntent extends BaseAPI {
+export class CreateIntent extends BaseAPI {
 
     static payload: Record<string, unknown>;
 
@@ -109,7 +109,7 @@ class CreateIntent extends BaseAPI {
         return this.getPayload({ ...defaultValues, ...options })
     }
 
-    static async createIntent(body: CreateIntentOptions, headers: Header) {
+    static async createIntent(body: CreateIntentOptions, headers?: Header) {
         this.setApiData("createIntent");
         const defaultValue = {
             origin: this.getAndDoneJsPortalUrl(),
@@ -125,5 +125,29 @@ class CreateIntent extends BaseAPI {
             { headers: Headers.getHeaders({ ...defaultValue, ...headers }), body: this.payload }
         );
     }
+
+    static async createIntentWithDefaultValues(body: CreateIntentOptions, headers?: Header) {
+        this.setApiData("createIntent");
+        const defaultValue = {
+            origin: this.getAndDoneJsPortalUrl(),
+            appKey: this.getAppKey(),
+            apiKey: this.getApiKey(),
+            xVersion: '2.0',
+            contentType: 'application/json'
+        }
+        this.payload = this.getPaylodWithDefaultValues(body);
+        return this.sendRequest(
+            this.geApiMethod(),
+            this.getBaseUrl() + this.getApiPath(),
+            { headers: Headers.getHeaders({ ...defaultValue, ...headers }), body: this.payload }
+        );
+    }
+
+
+    static async getPaymentIntentId() {
+        return await this.getResponseValue('paymentToken');
+    }
+
+    
 
 }

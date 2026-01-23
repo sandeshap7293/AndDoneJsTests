@@ -3,7 +3,7 @@ import { Headers } from "../payloads/headers";
 
 export class CreateIntentRequest extends BaseAPI {
 
-    static async createIntent(payload: Record<string, unknown>, headers:Header) {
+    static async createIntent(payload: Record<string, unknown>, headers?:Header) {
         this.setApiData("createIntent");
         const defaultValue = {
             origin:this.getAndDoneJsPortalUrl(), 

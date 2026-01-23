@@ -143,7 +143,7 @@ export class PaymentPage extends BasePage {
         await this.commonUtils.click(this.submitPayment_btn);
     }
 
-    // public fillAchDetails(options:ACH = {}) {
+    // public fillAchDetails(options:ACH = {accountHolderName}) {
 
     // }
 

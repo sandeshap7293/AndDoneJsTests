@@ -15,7 +15,7 @@ export class VariableFactory {
     private static allyPortalUrl:string;
     private static andDoneJsPortalUrl:string;
     
-    private static token:string
+    private static loginToken:string
     private static appKey:string
     private static apiKey:string
     private static paymentToken:string;
@@ -84,12 +84,12 @@ export class VariableFactory {
         this.andDoneJsPortalUrl = andDoneJsPortalUrl;
     }
 
-    static geToken() {
-        return this.token;
+    static getLoginToken() {
+        return this.loginToken;
     }
 
-    static setToken(token:string) {
-        this.token = token;
+    static setLoginToken(loginToken:string) {
+        this.loginToken = loginToken;
     }
 
     static getAppKey() {

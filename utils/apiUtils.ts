@@ -8,6 +8,7 @@ type RequestOptions = {
     body?: unknown;
     headers?: Record<string, string>;
     queryParams?: Record<string, string | number | boolean>;
+    pathParams?: Record<string, string>;
 };
 
 export class EmptyApiResponse {
@@ -23,12 +24,12 @@ export class ApiUtils extends ObjectFactory {
     private static request: APIRequestContext;
     private static response: APIResponse;
 
-    private static apiMethod:string;
-    private static apiPath:string;
+    private static apiMethod: string;
+    private static apiPath: string;
 
     private static responseCode: number;
     private static responseBody: any;
-    
+
     /**
      * This is private method to print json value in pretty format.
      * @param obj 
@@ -62,10 +63,10 @@ export class ApiUtils extends ObjectFactory {
      * This method set apiMethod and apiPath using apiData object of the json file.
      * @param apiName ApiName
      */
-    static setApiData(apiName:ApiName) {
+    static setApiData(apiName: ApiName) {
         this.apiMethod = apiData[apiName].method;
         this.apiPath = apiData[apiName].path;
-    } 
+    }
 
     /**
      * This method is to get api method.
@@ -83,6 +84,21 @@ export class ApiUtils extends ObjectFactory {
         return this.apiPath;
     }
 
+    private static buildPath(
+        apiPath: string,
+        pathParams?: Record<string, string>
+    ): string {
+        if (!pathParams) return apiPath;
+        let finalPath = apiPath;
+        for (const [key, value] of Object.entries(pathParams)) {
+            finalPath = finalPath.replace(
+                new RegExp(`{${key}}`, "g"),
+                encodeURIComponent(String(value))
+            );
+        }
+        return finalPath;
+    }
+
     /**
      * This method to log request details in console if apiLogs flag is true.
      * @param method string | 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
@@ -90,7 +106,7 @@ export class ApiUtils extends ObjectFactory {
      * @param options RequestOptions
      */
     static logRequest(method: string | 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH', url: string, options?: RequestOptions) {
-        if (this.apiLogs)  {
+        if (this.apiLogs) {
             console.log('Request:');
             console.log(method, url);
             if (options?.headers) console.log('Headers:', this.pretty(options.headers));
@@ -169,6 +185,7 @@ export class ApiUtils extends ObjectFactory {
         url: string,
         options?: RequestOptions
     ) {
+        url = this.buildPath(url, options?.pathParams);
         this.logRequest(method, url, options);
         const reqOptions: {
             headers?: Record<string, string>;
@@ -222,9 +239,54 @@ export class ApiUtils extends ObjectFactory {
      * @param path string - example 'customers'
      * @returns T = any []
      */
-    static getResponseArray<T = any>(path: string): T[] {
-        const value = this.getResponseValue(path, []);
+    static async getResponseArray<T = any>(path: string): Promise<T[]> {
+        const value = await this.getResponseValue(path, []);
         return Array.isArray(value) ? value : [];
     }
+
+    /**
+  * Finds an object inside an array and returns its id where multiple fields match
+  * @param arrayPath Path to array. Example: "data"
+  * @param match Object with fields to match. Example: { allyName: "Zbook1201", status: "ACTIVE" }
+  * @param idField Field to return (default = "id")
+  */
+    static async getResponseValueFromArray(
+        arrayPath: string,
+        objectName: string,
+        match: Record<string, any>
+    ): Promise<string> {
+        try {
+            if (!match || typeof match !== "object") {
+                return "";
+            }
+            let arr: any[];
+            if (!arrayPath) {
+                // ✅ Root response is array
+                const body = await this.getResponseBody();
+                arr = Array.isArray(body) ? body : [];
+            } else {
+                // ✅ Array is inside object path
+                arr = await this.getResponseArray<any>(arrayPath);
+            }
+            if (!Array.isArray(arr) || arr.length === 0) {
+                return "";
+            }
+            const found = arr.find(item => {
+                if (!item || typeof item !== "object") return false;
+                return Object.entries(match).every(([key, value]) => item?.[key] === value);
+            });
+            if (!found || typeof found !== "object") {
+                return "";
+            }
+            const result = found?.[objectName];
+            return result !== undefined && result !== null ? String(result) : "";
+        } catch (error) {
+            // Optional: console.warn("⚠️ getResponseValueFromArray failed:", error);
+            return "";
+        }
+    }
+
+
+
 
 }

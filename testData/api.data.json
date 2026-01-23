@@ -10,5 +10,9 @@
     "createIntent": {
         "method":"POST",
         "path": "/secure/paymentintents"
+    },
+    "getAllyUserKeys": {
+        "method":"GET",
+        "path":"/allies/{allyId}/users/{allyUserId}/keys"
     }
 }
