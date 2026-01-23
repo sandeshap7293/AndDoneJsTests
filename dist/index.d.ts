@@ -5,6 +5,7 @@ export * from "./api/requests/createIntent.request";
 export * from "./api/requests/login.request";
 export * from "./api/response/createIntent.response";
 export * from "./api/base.api";
+export * from "./api/createIntent";
 export * from "./helpers/objectFactory";
 export * from "./helpers/variableFactory";
 export * from "./pages/base.page";
