@@ -1,0 +1,25 @@
+name: Playwright Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Select environment"
+        required: true
+        default: "QAT"
+        type: choice
+        options:
+          - QAT
+          - UAT
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}   # 👈 THIS selects the env secrets
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+
+      - run: npm ci
+      - run: npx playwright test
